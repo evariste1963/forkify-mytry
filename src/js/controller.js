@@ -170,4 +170,3 @@ const showRecipe = async function () {
   }
 };
 showRecipe();
-console.log('delete this');
