@@ -1,3 +1,3 @@
 # forkify project
 
-recipe application
+recipe application - this is from the Udemy course by Jonas Schmedtmann
