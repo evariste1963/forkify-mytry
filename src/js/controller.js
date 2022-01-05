@@ -26,28 +26,28 @@ const renderSpinner = function (parentEl) {
             </svg>
           </div>
   `;
-  console.log(parentElement);
-  parentEl.innerHTML = '';
+  parentEl.innerHTML = ''; //clear out HTML container
   parentEl.insertAdjacentHTML('afterbegin', markup);
 };
 
 const showRecipe = async function () {
   try {
-    const id = window.location.hash.slice(1);
+    const id = window.location.hash.slice(1); //get recipe identity from browser HASH -- remove #
     if (!id) return;
     //1.loading recipe
     renderSpinner(recipeContainer);
     const res = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
+      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}` //fetch recipe based on id
       //`https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcb37`
     );
-    const data = await res.json();
+    const data = await res.json(); //format result using JSON function
 
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`); //throw error message if no result found
 
     //let recipe = data.data.recipe
     let { recipe } = data.data; // with destructuring
     recipe = {
+      // create recipe object from result
       id: recipe.id,
       title: recipe.title,
       publisher: recipe.publisher,
@@ -58,7 +58,7 @@ const showRecipe = async function () {
       ingredients: recipe.ingredients,
     };
     console.log(recipe);
-    //2. rendering recipe
+    //2. rendering recipe - create markup from recipe object
     const markup = `
         <figure class="recipe__fig">
         <img src="${recipe.image}" alt="${recipe.title}" class="recipe__img" />
@@ -166,11 +166,11 @@ const showRecipe = async function () {
         </a>
       </div>
       `;
-    recipeContainer.innerHTML = '';
-    recipeContainer.insertAdjacentHTML('afterbegin', markup);
+    recipeContainer.innerHTML = ''; //clear out HTML container
+    recipeContainer.insertAdjacentHTML('afterbegin', markup); //fill container with recipe data
   } catch (err) {
     alert(err);
   }
 };
-
+// load recipe when HASH changes or on load of new page
 ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));
