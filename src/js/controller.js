@@ -39,8 +39,8 @@ const showRecipe = async function () {
     renderSpinner(recipeContainer);
     //1.loading recipe
 
-    await model.loadRecipe(id);
-    const { recipe } = model.state;
+    await model.loadRecipe(id); //invoke loadRecipe function in model and pass in id
+    const { recipe } = model.state; //get state from model and create recipe object
     //2. rendering recipe - create markup from recipe object
     const markup = `
         <figure class="recipe__fig">

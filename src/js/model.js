@@ -1,5 +1,5 @@
 export const state = {
-  recipe: {},
+  recipe: {}, //update STATE with recipe
 };
 //change STATE object
 export const loadRecipe = async function (id) {
@@ -13,9 +13,10 @@ export const loadRecipe = async function (id) {
     if (!res.ok) throw new Error(`${data.message} (${res.status})`); //throw error message if no result found
 
     //let recipe = data.data.recipe
-    const { recipe } = data.data; // with destructuring
+    const { recipe } = data.data; // create recipe with recipe data --  destructured 
+    
     state.recipe = {
-      // create recipe object from result
+      // update STATE.recipe object above with current data
       id: recipe.id,
       title: recipe.title,
       publisher: recipe.publisher,
