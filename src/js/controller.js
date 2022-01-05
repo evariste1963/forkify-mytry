@@ -1,3 +1,5 @@
+import * as model from './model.js';
+
 // import icons from '../img/icons.svg' // for parcel v1
 import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
@@ -17,7 +19,7 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 
-//render spinner --- Parent element is the HTML class element that is the parent (main container) within which the markup sits
+//render spinner --- Parent element is the HTML class element that is the parent (main container) within which the markup sits/fills-out
 const renderSpinner = function (parentEl) {
   const markup = `
           <div class="spinner">
@@ -34,30 +36,11 @@ const showRecipe = async function () {
   try {
     const id = window.location.hash.slice(1); //get recipe identity from browser HASH -- remove #
     if (!id) return; // break out of function if there is no ID --ie load page first time
-    //1.loading recipe
     renderSpinner(recipeContainer);
-    const res = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}` //fetch recipe based on id
-      //`https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcb37`
-    );
-    const data = await res.json(); //format result using JSON function
+    //1.loading recipe
 
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`); //throw error message if no result found
-
-    //let recipe = data.data.recipe
-    let { recipe } = data.data; // with destructuring
-    recipe = {
-      // create recipe object from result
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image: recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients,
-    };
-    console.log(recipe);
+    await model.loadRecipe(id);
+    const { recipe } = model.state;
     //2. rendering recipe - create markup from recipe object
     const markup = `
         <figure class="recipe__fig">
