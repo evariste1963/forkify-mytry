@@ -17,7 +17,7 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 
-//render spinner
+//render spinner --- Parent element is the HTML class element that is the parent (main container) within which the markup sits
 const renderSpinner = function (parentEl) {
   const markup = `
           <div class="spinner">
@@ -26,14 +26,15 @@ const renderSpinner = function (parentEl) {
             </svg>
           </div>
   `;
+  console.log(parentElement);
   parentEl.innerHTML = '';
   parentEl.insertAdjacentHTML('afterbegin', markup);
 };
 
 const showRecipe = async function () {
   try {
-    const id = window.location.hash.slice(1)
-    if(!id) return
+    const id = window.location.hash.slice(1);
+    if (!id) return;
     //1.loading recipe
     renderSpinner(recipeContainer);
     const res = await fetch(
@@ -172,5 +173,4 @@ const showRecipe = async function () {
   }
 };
 
-['hashchange','load'].forEach(ev => window.addEventListener(ev, showRecipe))
-  
+['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe));
