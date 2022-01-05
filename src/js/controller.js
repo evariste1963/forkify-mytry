@@ -4,7 +4,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 const recipeContainer = document.querySelector('.recipe');
-console.log('HIIIII');
+
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
