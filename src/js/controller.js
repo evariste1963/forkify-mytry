@@ -4,7 +4,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
 const recipeContainer = document.querySelector('.recipe');
-
+console.log('HIIIII');
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
@@ -33,7 +33,7 @@ const renderSpinner = function (parentEl) {
 const showRecipe = async function () {
   try {
     const id = window.location.hash.slice(1); //get recipe identity from browser HASH -- remove #
-    if (!id) return;
+    if (!id) return; // break out of function if there is no ID --ie load page first time
     //1.loading recipe
     renderSpinner(recipeContainer);
     const res = await fetch(
