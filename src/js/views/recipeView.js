@@ -110,9 +110,6 @@ class RecipeView {
          `;
       })
       .join('')}
-     
-      
-    </ul>
   </div>
 
   <div class="recipe__directions">
