@@ -1,5 +1,5 @@
 export const state = {
-  recipe: {}, //update STATE with recipe
+  recipe: {}, //update STATE with recipe object -- from below
 };
 //change STATE object
 export const loadRecipe = async function (id) {
@@ -13,10 +13,10 @@ export const loadRecipe = async function (id) {
     if (!res.ok) throw new Error(`${data.message} (${res.status})`); //throw error message if no result found
 
     //let recipe = data.data.recipe
-    const { recipe } = data.data; // create recipe with recipe data --  destructured 
-    
+    const { recipe } = data.data; // create recipe with fetched recipe data --  destructured (was recipe = data.data.recipe)
+
     state.recipe = {
-      // update STATE.recipe object above with current data
+      // update STATE.recipe object above with fetched data
       id: recipe.id,
       title: recipe.title,
       publisher: recipe.publisher,
@@ -26,7 +26,7 @@ export const loadRecipe = async function (id) {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
-    console.log(state.recipe);
+    //console.log(state.recipe);
   } catch (err) {
     alert(err);
   }

@@ -8,6 +8,8 @@ class RecipeView {
   #parentElement = document.querySelector('.recipe'); //private property -- all views will have this PARENTELEMENT property so that it is easier to render spinner, success/error messages etc
   #data;
   render(data) {
+    // model.state object
+    console.log(data);
     this.#data = data; // set to data recieved
     const markup = this.#generateMarkup();
     this.#clear(); //clear out HTML container
