@@ -10,12 +10,12 @@ const timeout = function (s) {
 
 export const getJSON = async function (url) {
   try {
-    const res = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]); //fetch recipe based on id
+    const res = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]); //fetch recipe based on id -- race aganst error timer
     const data = await res.json(); //format result using JSON function
 
     if (!res.ok) throw new Error(`${data.message} (${res.status})`); //throw error message if no result found
-    return data;
+    return data; // retrun DATA to Model
   } catch (err) {
-    throw err;
+    throw err; //throw error back to Model
   }
 };
