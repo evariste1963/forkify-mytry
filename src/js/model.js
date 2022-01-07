@@ -1,5 +1,5 @@
-import { API_URL } from './config.js'
-import { getJSON } from './helper.js'
+import { API_URL } from './config.js';
+import { getJSON } from './helper.js';
 
 export const state = {
   recipe: {}, //update STATE with recipe object -- from below
@@ -7,8 +7,8 @@ export const state = {
 //change STATE object
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}/${id}`)
-          
+    const data = await getJSON(`${API_URL}/${id}`);
+
     //let recipe = data.data.recipe
     const { recipe } = data.data; // create recipe with fetched recipe data --  destructured (was recipe = data.data.recipe)
 
@@ -25,7 +25,7 @@ export const loadRecipe = async function (id) {
     };
     //console.log(state.recipe);
   } catch (err) {
-    // temporary error handling
-    console.error(`${err} 💥💥💥`)
+    // temporary error handling --thrown from helper.js
+    console.error(`${err} 💥💥💥`);
   }
 };
