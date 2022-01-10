@@ -34,10 +34,9 @@ class RecipeView {
   };
 
   // load recipe when HASH changes or on load of new page
+  //handler passed in from controller on start up
   addHandlerRender(handler) {
-    ['hashchange', 'load'].forEach(ev =>
-      window.addEventListener(ev, controlRecipes)
-    );
+    ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, handler));
   }
   #generateMarkup() {
     return `
