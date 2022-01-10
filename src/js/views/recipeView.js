@@ -33,6 +33,12 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   };
 
+  // load recipe when HASH changes or on load of new page
+  addHandlerRender(handler) {
+    ['hashchange', 'load'].forEach(ev =>
+      window.addEventListener(ev, controlRecipes)
+    );
+  }
   #generateMarkup() {
     return `
     <figure class="recipe__fig">
