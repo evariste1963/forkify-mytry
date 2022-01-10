@@ -21,7 +21,7 @@ class RecipeView {
   }
 
   //render spinner --- Parent element is the HTML class element that is the parent (main container) within which the markup sits/fills-out -- this is a public method for use everywhere
-  renderSpinner = function () {
+  renderSpinner() {
     const markup = `
             <div class="spinner">
               <svg>
@@ -29,9 +29,9 @@ class RecipeView {
               </svg>
             </div>
     `;
-    this.#parentElement.innerHTML = ''; //clear out HTML container
+    this.#clear(); //clear out HTML container
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
-  };
+  }
 
   // load recipe when HASH changes or on load of new page
   //handler passed in from controller on start up (subscriber/publisher)
