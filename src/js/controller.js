@@ -30,7 +30,8 @@ const controlRecipes = async function () {
     //2. rendering recipe - create markup from recipe object
     recipeView.render(model.state.recipe); //invoke recipeView render method using STATE.RECIPE object from MODEL
   } catch (err) {
-    alert(err);
+    console.log(err);
+    recipeView.renderError();
   }
 };
 

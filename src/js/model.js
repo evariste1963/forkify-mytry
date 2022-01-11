@@ -7,7 +7,7 @@ export const state = {
 //change STATE object
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}/${id}`);
+    const data = await getJSON(`${API_URL}/${id}`); // call fetch from helper.js
 
     //let recipe = data.data.recipe
     const { recipe } = data.data; // create recipe with fetched recipe data --  destructured (was recipe = data.data.recipe)
@@ -25,7 +25,8 @@ export const loadRecipe = async function (id) {
     };
     //console.log(state.recipe);
   } catch (err) {
-    // temporary error handling --thrown from helper.js
+    // temporary error handling
     console.error(`${err} 💥💥💥`);
+    throw err;
   }
 };

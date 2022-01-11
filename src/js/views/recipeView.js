@@ -7,6 +7,9 @@ console.log(Fraction);
 class RecipeView {
   #parentElement = document.querySelector('.recipe'); //private property -- all views will have this PARENTELEMENT property so that it is easier to render spinner, success/error messages etc
   #data;
+  #errorMessage = "We couldn't find that recipe. Please try another one!";
+  #message = '';
+
   render(data) {
     // model.state object
     console.log(data);
@@ -29,6 +32,36 @@ class RecipeView {
               </svg>
             </div>
     `;
+    this.#clear(); //clear out HTML container
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  renderError(message = this.#errorMessage) {
+    const markup = `
+  <div class="error">
+            <div>
+              <svg>
+                <use href="${icons}#icon-alert-triangle"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>
+  `;
+    this.#clear(); //clear out HTML container
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  renderMessage(message = this.#message) {
+    const markup = `
+  <div class="message">
+            <div>
+              <svg>
+                <use href="${icons}#icon-smile"></use>
+              </svg>
+            </div>
+            <p>${message}</p>
+          </div>
+  `;
     this.#clear(); //clear out HTML container
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   }
