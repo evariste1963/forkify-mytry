@@ -1,7 +1,6 @@
 // import icons from '../img/icons.svg' // for parcel v1
 import icons from 'url:../../img/icons.svg';
 import { Fraction } from 'fractional';
-console.log(Fraction);
 
 //all views aill be classes so that they can be emalgamated into the Parent view class
 class RecipeView {
