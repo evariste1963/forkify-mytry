@@ -5,6 +5,11 @@ import resultsView from './views/resultsView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+//not JS but coming from parcel
+if (module.hot) {
+  module.hot.accept();
+}
+
 const timeout = function (s) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
@@ -44,7 +49,8 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     //3) render search results
-    console.log(model.state.search.results);
+    //console.log(model.state.search.results);
+    resultsView.render(model.state.search.results);
   } catch (err) {
     console.log(err);
   }
