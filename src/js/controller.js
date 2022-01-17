@@ -5,7 +5,8 @@ import resultsView from './views/resultsView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-//not JS but coming from parcel
+//not JS but coming from parcel !!!
+//stops page reloading when changing something in the code
 if (module.hot) {
   module.hot.accept();
 }
