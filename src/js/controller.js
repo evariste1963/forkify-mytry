@@ -48,7 +48,7 @@ const controlSearchResults = async function () {
     if (!query) return;
     // 2) load search results
     await model.loadSearchResults(query);
-
+    //console.log(model.state.search.results);
     //3) render search results
     // resultsView.render(model.state.search.results); //renders ALL of search results array
     resultsView.render(model.getSearchResultsPage()); //renders search results based on num per page -- const in config.js
