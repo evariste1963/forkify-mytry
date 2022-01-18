@@ -50,9 +50,8 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     //3) render search results
-    //console.log(model.state.search.results);
-    // resultsView.render(model.state.search.results);
-    resultsView.render(model.getSearchResultsPage(3));
+    // resultsView.render(model.state.search.results); //renders ALL of search results array
+    resultsView.render(model.getSearchResultsPage()); //renders search results based on num per page -- const in config.js
   } catch (err) {
     console.log(err);
   }
