@@ -3,11 +3,15 @@ import { getJSON } from './helper.js';
 
 export const state = {
   recipe: {}, //update STATE with recipe object -- from below
+  search: {
+    query: '',
+    results: [],
+  },
 };
 //change STATE object
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}/${id}`);
+    const data = await getJSON(`${API_URL}${id}`); // call fetch from helper.js
 
     //let recipe = data.data.recipe
     const { recipe } = data.data; // create recipe with fetched recipe data --  destructured (was recipe = data.data.recipe)
@@ -25,7 +29,25 @@ export const loadRecipe = async function (id) {
     };
     //console.log(state.recipe);
   } catch (err) {
-    // temporary error handling --thrown from helper.js
-    console.error(`${err} 💥💥💥`);
+    throw err;
+  }
+};
+export const loadSearchResults = async function (query) {
+  //query comes from controller
+  try {
+    state.search.query = query;
+    const data = await getJSON(`${API_URL}?search=${query}`);
+    console.log(data);
+
+    state.search.results = data.data.recipes.map(rec => {
+      return {
+        id: rec.id,
+        title: rec.title,
+        publisher: rec.publisher,
+        image: rec.image_url,
+      };
+    });
+  } catch (err) {
+    throw err;
   }
 };
