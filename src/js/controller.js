@@ -7,9 +7,9 @@ import 'regenerator-runtime/runtime';
 
 //not JS but coming from parcel !!!
 //stops page reloading when changing something in the code
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -51,7 +51,8 @@ const controlSearchResults = async function () {
 
     //3) render search results
     //console.log(model.state.search.results);
-    resultsView.render(model.state.search.results);
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultsPage(3));
   } catch (err) {
     console.log(err);
   }
