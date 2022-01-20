@@ -33,7 +33,6 @@ const controlRecipes = async function () {
 
     //1.loading recipe
     await model.loadRecipe(id); //invoke loadRecipe function in model and pass in id
-
     //2. rendering recipe - create markup from recipe object
     recipeView.render(model.state.recipe); //invoke recipeView render method using STATE.RECIPE object from MODEL
   } catch (err) {
@@ -53,7 +52,7 @@ const controlSearchResults = async function () {
     //console.log(model.state.search.results);
     //3) render search results
     // resultsView.render(model.state.search.results); //renders ALL of search results array
-    resultsView.render(model.getSearchResultsPage()); //renders search results based on num per page -- const in config.js
+    resultsView.render(model.getSearchResultsPage(1)); //renders search results based on num per page -- const in config.js
 
     //4) render inital pagination buttons
     paginationView.render(model.state.search);
@@ -62,9 +61,16 @@ const controlSearchResults = async function () {
   }
 };
 
+const controlPagination = function (goToPage) {
+  //1) render NEW page search results
+  resultsView.render(model.getSearchResultsPage(goToPage));
+  //2) render New Page pagination buttons
+  paginationView.render(model.state.search);
+};
 //immediately pass controlRecipe to recipeView on startup (subscriber/publisher)
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 init();
