@@ -39,9 +39,9 @@ class RecipeView extends View {
       <svg class="recipe__info-icon">
         <use href="${icons}#icon-users"></use>
       </svg>
-      <span class="recipe__info-data recipe__info-data--people">4</span>${
+      <span class="recipe__info-data recipe__info-data--people">${
         this._data.servings
-      }
+      }</span>
       <span class="recipe__info-text">servings</span>
 
       <div class="recipe__info-buttons">

@@ -35,6 +35,8 @@ const controlRecipes = async function () {
     await model.loadRecipe(id); //invoke loadRecipe function in model and pass in id
     //2. rendering recipe - create markup from recipe object
     recipeView.render(model.state.recipe); //invoke recipeView render method using STATE.RECIPE object from MODEL
+    controlServings();
+    
   } catch (err) {
     console.log(err);
     recipeView.renderError();
@@ -66,6 +68,13 @@ const controlPagination = function (goToPage) {
   resultsView.render(model.getSearchResultsPage(goToPage));
   //2) render New Page pagination buttons
   paginationView.render(model.state.search);
+};
+
+const controlServings = function () {
+  //update the recipe servings (state
+  model.updateServings(50);
+  //update the recipe view)
+  recipeView.render(model.state.recipe);
 };
 //immediately pass controlRecipe to recipeView on startup (subscriber/publisher)
 const init = function () {

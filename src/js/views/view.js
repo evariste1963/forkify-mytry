@@ -8,7 +8,6 @@ export default class View {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
     // model.state object
-    console.log(data);
     this._data = data; // set to data recieved
     const markup = this._generateMarkup();
     this._clear(); //clear out HTML container
