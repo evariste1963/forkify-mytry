@@ -31,6 +31,9 @@ const controlRecipes = async function () {
     if (!id) return; // break out of function if there is no ID --ie load page first time
     recipeView.renderSpinner(); //invoke renderSpinner in recipeView to show that something is happening during fetch
 
+    //0 update results view to mark selected serach result
+    resultsView.update(model.getSearchResultsPage());
+
     //1.loading recipe
     await model.loadRecipe(id); //invoke loadRecipe function in model and pass in id
     //2. rendering recipe - create markup from recipe object
@@ -44,6 +47,7 @@ const controlRecipes = async function () {
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
+
     //1) get search query
     const query = searchView.getQuery();
     if (!query) return;
@@ -72,7 +76,8 @@ const controlServings = function (newServings) {
   //update the recipe servings (state
   model.updateServings(newServings);
   //update the recipe view)
-  recipeView.render(model.state.recipe);
+  //recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
 //immediately pass controlRecipe to recipeView on startup (subscriber/publisher)
 const init = function () {
