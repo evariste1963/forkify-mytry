@@ -40,7 +40,7 @@ export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
     const data = await getJSON(`${API_URL}?search=${query}`);
-    console.log(data);
+    //console.log(data);
 
     state.search.results = data.data.recipes.map(rec => {
       return {
@@ -50,6 +50,7 @@ export const loadSearchResults = async function (query) {
         image: rec.image_url,
       };
     });
+    //state.search.page = 1; //restarts search results at page 1 --- mone worked anyhow -- because of 'model.getSearchResultsPage(1)' in controller
   } catch (err) {
     throw err;
   }

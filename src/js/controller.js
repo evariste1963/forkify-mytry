@@ -32,7 +32,7 @@ const controlRecipes = async function () {
     recipeView.renderSpinner(); //invoke renderSpinner in recipeView to show that something is happening during fetch
 
     //0 update results view to mark selected serach result
-    resultsView.update(model.getSearchResultsPage());
+    resultsView.update(model.getSearchResultsPage()); // 'update' is new esjs..doesn't work in all browsers (many!) -- could also use 'render' instead (no other code changes req)
 
     //1.loading recipe
     await model.loadRecipe(id); //invoke loadRecipe function in model and pass in id
