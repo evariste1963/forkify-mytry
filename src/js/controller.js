@@ -81,10 +81,12 @@ const controlServings = function (newServings) {
 };
 
 const controlAddBookmark = function () {
-  model.addBookmark(model.state.Recipe);
-  console.log(model.state.Recipe);
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id);
+  console.log(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
-//immediately pass controlRecipe to recipeView on startup (subscriber/publisher)
+//immediately pass controls to Views on startup (subscriber/publisher)
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
