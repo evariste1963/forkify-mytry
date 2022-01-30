@@ -33,6 +33,7 @@ const controlRecipes = async function () {
 
     //0 update results view to mark selected serach result
     resultsView.update(model.getSearchResultsPage()); // 'update' is new esjs..doesn't work in all browsers (many!) -- could also use 'render' instead (no other code changes req)
+    //resultsView.update(model.getSearchResultsPage());
 
     //1.loading recipe
     await model.loadRecipe(id); //invoke loadRecipe function in model and pass in id
@@ -76,7 +77,7 @@ const controlServings = function (newServings) {
   //update the recipe servings (state
   model.updateServings(newServings);
   //update the recipe view)
-  //recipeView.render(model.state.recipe);
+  //recipeView.render(model.state.recipe); // use this if beowser doesn't understand update
   recipeView.update(model.state.recipe);
 };
 
