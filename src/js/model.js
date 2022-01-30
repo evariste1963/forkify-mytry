@@ -9,6 +9,7 @@ export const state = {
     page: 1, // to be made dynamic in next lesson 298
     resultsPerPage: RES_PER_PAGE,
   },
+  bookmarks: [],
 };
 //change STATE object
 export const loadRecipe = async function (id) {
@@ -50,7 +51,7 @@ export const loadSearchResults = async function (query) {
         image: rec.image_url,
       };
     });
-    //state.search.page = 1; //restarts search results at page 1 --- mone worked anyhow -- because of 'model.getSearchResultsPage(1)' in controller
+    state.search.page = 1; //restarts search results at page 1 --- mine worked anyhow -- because of 'model.getSearchResultsPage(1)' in controller
   } catch (err) {
     throw err;
   }
@@ -68,4 +69,12 @@ export const updateServings = function (newServings) {
     ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
   });
   state.recipe.servings = newServings; // update the state so that it reflects the newServings as a base value
+};
+
+export const addBookmark = function (recipe) {
+  //add bookmark
+  state.bookmarks.push(recipe);
+
+  //mark current recipe as bookmark
+  if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
 };
