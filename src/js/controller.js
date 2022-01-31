@@ -3,6 +3,7 @@ import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -34,6 +35,7 @@ const controlRecipes = async function () {
     //0 update results view to mark selected serach result
     resultsView.update(model.getSearchResultsPage()); // 'update' is new esjs..doesn't work in all browsers (many!) -- could also use 'render' instead (no other code changes req)
     //resultsView.update(model.getSearchResultsPage());
+    bookmarksView.render(model.state.bookmarks);
 
     //1.loading recipe
     await model.loadRecipe(id); //invoke loadRecipe function in model and pass in id
@@ -78,14 +80,19 @@ const controlServings = function (newServings) {
   model.updateServings(newServings);
   //update the recipe view)
   //recipeView.render(model.state.recipe); // use this if beowser doesn't understand update
-  recipeView.update(model.state.recipe);
+  recipeView.render(model.state.recipe);
 };
 
 const controlAddBookmark = function () {
+  //1 add or remove bookmark
   if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
   else model.deleteBookmark(model.state.recipe.id);
-  console.log(model.state.recipe);
-  recipeView.update(model.state.recipe);
+
+  //2 update recipe view
+  recipeView.render(model.state.recipe);
+
+  //3 render bookmarks
+  bookmarksView.render(model.state.bookmarks);
 };
 //immediately pass controls to Views on startup (subscriber/publisher)
 const init = function () {
