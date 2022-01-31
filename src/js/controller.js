@@ -33,8 +33,8 @@ const controlRecipes = async function () {
     recipeView.renderSpinner(); //invoke renderSpinner in recipeView to show that something is happening during fetch
 
     //0 update results view to mark selected serach result
-    resultsView.update(model.getSearchResultsPage()); // 'update' is new esjs..doesn't work in all browsers (many!) -- could also use 'render' instead (no other code changes req)
-    //resultsView.update(model.getSearchResultsPage());
+    resultsView.update(model.getSearchResultsPage()); // 'update' is new esjs..doesn't work in all browsers (many!) -- could also use 'render' instead (no other code changes req -- as below here)
+    //resultsView.render(model.getSearchResultsPage());
     bookmarksView.render(model.state.bookmarks);
 
     //1.loading recipe
@@ -79,8 +79,8 @@ const controlServings = function (newServings) {
   //update the recipe servings (state
   model.updateServings(newServings);
   //update the recipe view)
-  //recipeView.render(model.state.recipe); // use this if beowser doesn't understand update
-  recipeView.render(model.state.recipe);
+  //recipeView.render(model.state.recipe); // use this if browser doesn't understand update
+  recipeView.update(model.state.recipe);
 };
 
 const controlAddBookmark = function () {
