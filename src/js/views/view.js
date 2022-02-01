@@ -3,13 +3,15 @@ import icons from 'url:../../img/icons.svg';
 
 export default class View {
   _data;
-  render(data) {
+  render(data, render = true) {
     //guard clause to check if data array is empty( fetch successful but no results) or there is no data found
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
     // model.state object
     this._data = data; // set to data recieved
     const markup = this._generateMarkup();
+
+    if (!render) return markup;
     this._clear(); //clear out HTML container
     this._parentElement.insertAdjacentHTML('afterbegin', markup); //fill container with recipe data
   }
