@@ -35,11 +35,12 @@ const controlRecipes = async function () {
     //0 update results view to mark selected serach result
     resultsView.update(model.getSearchResultsPage()); // 'update' is new esjs..doesn't work in all browsers (many!) -- could also use 'render' instead (no other code changes req -- as below here)
     //resultsView.render(model.getSearchResultsPage());
+    //1 render bookmarks
     bookmarksView.render(model.state.bookmarks);
 
-    //1.loading recipe
+    //2.loading recipe
     await model.loadRecipe(id); //invoke loadRecipe function in model and pass in id
-    //2. rendering recipe - create markup from recipe object
+    //3. rendering recipe - create markup from recipe object
     recipeView.render(model.state.recipe); //invoke recipeView render method using STATE.RECIPE object from MODEL
   } catch (err) {
     console.log(err);
@@ -94,8 +95,13 @@ const controlAddBookmark = function () {
   //3 render bookmarks
   bookmarksView.render(model.state.bookmarks);
 };
+
+const controlBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
 //immediately pass controls to Views on startup (subscriber/publisher)
 const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
