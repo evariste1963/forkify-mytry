@@ -8,6 +8,28 @@ const timeout = function (s) {
   });
 };
 
+export const AJAX = async function (url, uploadData = undefined) {
+  try {
+    const fetchPro = uploadData
+      ? fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(uploadData),
+        })
+      : fetch(url);
+
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]); //fetch recipe based on id -- race aganst error timer
+    const data = await res.json(); //format result using JSON function
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`); //throw error message if no result found
+    return data; // return DATA to Model
+  } catch (err) {
+    throw err; //throw error back to Model
+  }
+};
+/*
 export const getJSON = async function (url) {
   try {
     const fetchPro = fetch(url);
@@ -39,3 +61,4 @@ export const sendJSON = async function (url, uploadData) {
     throw err; //throw error back to Model
   }
 };
+*/
