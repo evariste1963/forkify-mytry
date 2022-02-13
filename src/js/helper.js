@@ -10,7 +10,27 @@ const timeout = function (s) {
 
 export const getJSON = async function (url) {
   try {
-    const res = await Promise.race([fetch(url), timeout(TIMEOUT_SEC)]); //fetch recipe based on id -- race aganst error timer
+    const fetchPro = fetch(url);
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]); //fetch recipe based on id -- race aganst error timer
+    const data = await res.json(); //format result using JSON function
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`); //throw error message if no result found
+    return data; // return DATA to Model
+  } catch (err) {
+    throw err; //throw error back to Model
+  }
+};
+
+export const sendJSON = async function (url, uploadData) {
+  try {
+    const fetchPro = fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(uploadData),
+    });
+    const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]); //fetch recipe based on id -- race aganst error timer
     const data = await res.json(); //format result using JSON function
 
     if (!res.ok) throw new Error(`${data.message} (${res.status})`); //throw error message if no result found

@@ -1,4 +1,5 @@
 import * as model from './model.js';
+import { MODEL_CLOSE_SEC } from './config.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
@@ -101,9 +102,35 @@ const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
-const controlAddRecipe = function (newRecipe) {
-  console.log(newRecipe);
-  //Upload new recipe data
+const controlAddRecipe = async function (newRecipe) {
+  try {
+    //render spinner
+    addRecipeView.renderSpinner();
+
+    //Upload new recipe data
+    await model.uploadRecipe(newRecipe);
+    console.log(model.state.recipe);
+
+    //render recipe
+    recipeView.render(model.state.recipe);
+
+    //display success message
+    addRecipeView.renderMessage();
+
+    //render bookmark view
+    bookmarksView.render(model.state.bookmarks);
+
+    //change id in URL
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+
+    //close form window
+    setTimeout(function () {
+      addRecipeView.toggleWindow();
+    }, MODEL_CLOSE_SEC * 1000);
+  } catch (err) {
+    console.log('********', err);
+    addRecipeView.renderError(err.message);
+  }
 };
 //immediately pass controls to Views on startup (subscriber/publisher)
 const init = function () {
