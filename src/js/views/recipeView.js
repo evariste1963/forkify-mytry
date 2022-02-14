@@ -1,7 +1,7 @@
 import View from './View';
 // import icons from '../img/icons.svg' // for parcel v1
 import icons from 'url:../../img/icons.svg';
-import { Fraction } from 'fractional';
+import fracty from 'fracty';
 
 //all views aill be classes so that they can be emalgamated into the Parent view class
 class RecipeView extends View {
@@ -129,7 +129,7 @@ class RecipeView extends View {
           <use href="${icons}#icon-check"></use>
         </svg>
         <div class="recipe__quantity">${
-          ing.quantity ? new Fraction(ing.quantity).toString() : ''
+          ing.quantity ? fracty(ing.quantity).toString() : ''
         }</div>
       
 
