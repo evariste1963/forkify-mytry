@@ -24,10 +24,6 @@ const timeout = function (s) {
   });
 };
 
-// https://forkify-api.herokuapp.com/v2
-
-///////////////////////////////////////
-
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1); //get recipe identity from browser HASH -- remove #
@@ -61,7 +57,6 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
     //console.log(model.state.search.results);
     //3) render search results
-    // resultsView.render(model.state.search.results); //renders ALL of search results array
     resultsView.render(model.getSearchResultsPage()); //renders search results based on num per page -- const in config.js
 
     //4) render inital pagination buttons
