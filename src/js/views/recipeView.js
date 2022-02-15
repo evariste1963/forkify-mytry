@@ -1,7 +1,7 @@
 import View from './view';
 // import icons from '../img/icons.svg' // for parcel v1
 import icons from 'url:../../img/icons.svg';
-import fracty from 'fracty'; // doesn't work on netlify -- nor fractional either
+import fracty from 'fracty';
 
 //all views aill be classes so that they can be emalgamated into the Parent view class
 class RecipeView extends View {
